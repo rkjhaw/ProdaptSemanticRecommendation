@@ -1,5 +1,6 @@
 import React from "react";
 import { FileText, HelpCircle, Briefcase, ListChecks, Database, ArrowRight, ExternalLink, ShieldCheck, Cpu, Terminal, Layers } from "lucide-react";
+import DocumentationGuide from "./DocumentationGuide.tsx";
 
 // Import diagrams so Vite resolves and bundles them correctly
 import architectureDiagramUrl from "../assets/images/system_architecture_1784018897272.jpg";
@@ -254,6 +255,9 @@ export default function AssignmentAsk() {
           </table>
         </div>
       </div>
+
+      {/* NEW SECTION: Programmatic Documentation Guide */}
+      <DocumentationGuide />
 
       {/* NEW SECTION: Technical Architecture Diagrams */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
