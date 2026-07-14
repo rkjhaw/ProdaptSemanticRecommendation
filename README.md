@@ -140,8 +140,12 @@ For isolated, portable execution matching a production environment, run with Doc
 
 ## 📈 System Architecture & Flow
 
-Below is the conceptual architecture of the semantic search and personalized styling engine:
+### 1. High-Level System Architecture
+Below is the visual and conceptual architecture of the semantic search and personalized styling engine. This highlights the data processing pipelines representing query intake, vector similarity searching, and generative personalized styling reporting:
 
+![System Architecture Diagram](src/assets/images/system_architecture_1784018897272.jpg)
+
+#### Text/ASCII Flow Representation:
 ```
 [User Natural Query]
         │
@@ -180,6 +184,13 @@ Below is the conceptual architecture of the semantic search and personalized sty
                         │   JSON API Response    │
                         └────────────────────────┘
 ```
+
+---
+
+### 2. Product Recommendation Request Lifecycle (Sequence Diagram)
+Below is the sequential call flow showing how a user request interacts step-by-step with the API gateway, model endpoints, and similarity vector matrix:
+
+![Sequence Lifecycle Diagram](src/assets/images/sequence_lifecycle_diagram_1784056719722.jpg)
 
 ---
 

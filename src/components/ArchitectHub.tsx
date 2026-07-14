@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ArchitectDoc } from "../types.ts";
-import { BookOpen, Cpu, Layers, GitCommit, FileText, ArrowRight, Server, Shield, Sparkles, AlertTriangle } from "lucide-react";
+import { BookOpen, Cpu, Layers, GitCommit, FileText, ArrowRight, Server, Shield, Sparkles, AlertTriangle, RefreshCw } from "lucide-react";
+
+// Import images to allow Vite to resolve and bundle them correctly for production serving
+import architectureDiagramUrl from "../assets/images/system_architecture_1784018897272.jpg";
+import sequenceDiagramUrl from "../assets/images/sequence_lifecycle_diagram_1784056719722.jpg";
 
 export const ArchitectHub: React.FC = () => {
   const [activeSubTab, setActiveSubTab] = useState<"architecture" | "sequence" | "tradeoffs" | "production">("architecture");
   const [docData, setDocData] = useState<ArchitectDoc | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // Hardcoded image path generated in our first step
-  const architectureDiagramUrl = "/src/assets/images/system_architecture_1784018897272.jpg";
 
   useEffect(() => {
     const fetchDoc = async () => {
@@ -166,6 +167,18 @@ export const ArchitectHub: React.FC = () => {
           <div className="space-y-1">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Product Recommendation Request Lifecycle</h3>
             <p className="text-xs text-slate-400">Step-by-step transaction flow detailing sequential call-chains and database lookups.</p>
+          </div>
+
+          {/* High Resolution Sequence Diagram Image */}
+          <div className="border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center p-2 shadow-inner">
+            <img
+              src={sequenceDiagramUrl}
+              alt="Sequence Lifecycle Diagram"
+              className="w-full max-w-4xl object-contain h-auto rounded-xl border border-slate-800"
+              onError={(e) => {
+                console.error("Sequence diagram failed to load", e);
+              }}
+            />
           </div>
 
           <div className="relative border-l-2 border-indigo-150 dark:border-indigo-950 ml-4 pl-8 space-y-8">

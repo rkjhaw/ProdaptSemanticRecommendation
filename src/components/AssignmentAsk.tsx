@@ -1,5 +1,9 @@
 import React from "react";
-import { FileText, HelpCircle, Briefcase, ListChecks, Database, ArrowRight, ExternalLink, ShieldCheck, Cpu } from "lucide-react";
+import { FileText, HelpCircle, Briefcase, ListChecks, Database, ArrowRight, ExternalLink, ShieldCheck, Cpu, Terminal, Layers } from "lucide-react";
+
+// Import diagrams so Vite resolves and bundles them correctly
+import architectureDiagramUrl from "../assets/images/system_architecture_1784018897272.jpg";
+import sequenceDiagramUrl from "../assets/images/sequence_lifecycle_diagram_1784056719722.jpg";
 
 export default function AssignmentAsk() {
   const dataFields = [
@@ -251,6 +255,154 @@ export default function AssignmentAsk() {
         </div>
       </div>
 
+      {/* NEW SECTION: Technical Architecture Diagrams */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
+        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+          <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg text-indigo-600 dark:text-indigo-400">
+            <Layers className="w-4 h-4" />
+          </div>
+          <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide">
+            Enterprise & Solution Architecture Diagrams
+          </h4>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Architecture Card */}
+          <div className="space-y-3">
+            <span className="text-[10px] font-mono font-bold text-indigo-500 uppercase tracking-widest block">System Visualization 1</span>
+            <h5 className="font-bold text-slate-950 dark:text-white text-xs">High-Level System Architecture Diagram</h5>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Details the full data ingestion and recommendation pipeline: how static Huggingface JSON metadata is parsed, formatted into dense text tokens, embedded into 768-D vectors, and indexed in-memory for lightning-fast Cosine similarity matching during client interaction.
+            </p>
+            <div className="border border-slate-150 dark:border-slate-800 rounded-xl overflow-hidden bg-slate-950 p-1">
+              <img 
+                src={architectureDiagramUrl} 
+                alt="High Level System Architecture" 
+                className="w-full object-cover rounded-lg hover:scale-[1.01] transition-transform duration-300"
+                onError={(e) => console.error("Architecture img failed to load", e)}
+              />
+            </div>
+          </div>
+
+          {/* Sequence Card */}
+          <div className="space-y-3">
+            <span className="text-[10px] font-mono font-bold text-indigo-500 uppercase tracking-widest block">System Visualization 2</span>
+            <h5 className="font-bold text-slate-950 dark:text-white text-xs">Product Recommendation Request Lifecycle</h5>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Showcases the client-server interaction lifecycle. Highlights the gateway query translation, embedding API fetch, vector space ranking, and ultimate stylistic output generation by the Gemini 3.5 Flash Stylist model.
+            </p>
+            <div className="border border-slate-150 dark:border-slate-800 rounded-xl overflow-hidden bg-slate-950 p-1">
+              <img 
+                src={sequenceDiagramUrl} 
+                alt="Product Recommendation Sequence Flow" 
+                className="w-full object-cover rounded-lg hover:scale-[1.01] transition-transform duration-300"
+                onError={(e) => console.error("Sequence img failed to load", e)}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* NEW SECTION: Full Executable Code Setup & README Explanation */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
+        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+          <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg text-indigo-600 dark:text-indigo-400">
+            <Terminal className="w-4 h-4" />
+          </div>
+          <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide">
+            Portfolio Project Specifications (README Guide)
+          </h4>
+        </div>
+
+        <div className="space-y-6 text-xs text-slate-600 dark:text-slate-300">
+          {/* Section 1: Setup */}
+          <div className="space-y-3">
+            <h5 className="text-slate-900 dark:text-white font-bold text-sm flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
+              1. Project Setup & Quickstart (How to Run)
+            </h5>
+            <p className="leading-relaxed">
+              The prototype is a unified full-stack application leveraging <strong>Vite + React</strong> on the client-side, and an <strong>Express API Gateway Server</strong> on the backend. This architecture guarantees that heavy mathematical vector operations and sensitive Gemini API credentials remain secure.
+            </p>
+            <div className="bg-slate-950 text-slate-100 p-4 rounded-xl font-mono text-[11px] leading-relaxed border border-slate-800 space-y-2">
+              <div><span className="text-slate-500"># 1. Clone or download the repository, then navigate to root</span></div>
+              <div>cd semantic-recommendation-microservice</div>
+              <div className="pt-2"><span className="text-slate-500"># 2. Install required packages</span></div>
+              <div>npm install</div>
+              <div className="pt-2"><span className="text-slate-500"># 3. Create a .env file and input your API key</span></div>
+              <div>echo "GEMINI_API_KEY=your_gemini_api_key_here" &gt; .env</div>
+              <div className="pt-2"><span className="text-slate-500"># 4. Start the hybrid Express + Vite server (Port 3000)</span></div>
+              <div>npm run dev</div>
+            </div>
+          </div>
+
+          {/* Section 2: Sample Usage */}
+          <div className="space-y-3 pt-2">
+            <h5 className="text-slate-900 dark:text-white font-bold text-sm flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
+              2. Sample Usage & Query Evaluation
+            </h5>
+            <p className="leading-relaxed">
+              When a request is posted to our API, the server executes a series of pipeline operations:
+            </p>
+            <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-150 dark:border-slate-800/80 space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <span className="text-[10px] uppercase font-mono font-bold text-indigo-500">Natural-Language Query</span>
+                  <div className="p-3 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-lg italic">
+                    "I want to go for a summer party at the beach, suggest some light clothes with a matching casual pair of shoes."
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-[10px] uppercase font-mono font-bold text-emerald-500 font-bold">Semantic Engine Output</span>
+                  <div className="p-3 bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800 rounded-lg">
+                    <ul className="space-y-1 text-[11px] list-disc list-inside text-slate-500 dark:text-slate-400">
+                      <li>Matching products ranked via Cosine Similarity</li>
+                      <li>Light breathable shorts & designer swimwear retrieved</li>
+                      <li>Aurelio footwear casual matching sneakers matched</li>
+                      <li>AI-Generated styling advice matching party trends</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 3: Design Decisions */}
+          <div className="space-y-3 pt-2">
+            <h5 className="text-slate-900 dark:text-white font-bold text-sm flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
+              3. Key Design Decisions & Trade-offs
+            </h5>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-150 dark:border-slate-800 space-y-2">
+                <span className="text-xs font-bold text-slate-800 dark:text-white block">In-Memory Indexer</span>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                  <strong>Choice:</strong> Implemented static 768-D array mapping with dynamic dot product evaluation on startup.<br/>
+                  <strong>Trade-off:</strong> Negates the requirement of provisioning full external Vector databases (like Pinecone) for lightweight microservices, but memory scales linearly with dataset row density.
+                </p>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-150 dark:border-slate-800 space-y-2">
+                <span className="text-xs font-bold text-slate-800 dark:text-white block">Gemini 3.5 Flash Planner</span>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                  <strong>Choice:</strong> Utilized Gemini 3.5 Flash with custom system parameters over heavier models.<br/>
+                  <strong>Trade-off:</strong> Dramatically reduces API latency and cost profiles while maintaining high stylistic accuracy and structured JSON schema output parsing.
+                </p>
+              </div>
+
+              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-150 dark:border-slate-800 space-y-2">
+                <span className="text-xs font-bold text-slate-800 dark:text-white block">Hybrid Semantic / Keyword Fallback</span>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                  <strong>Choice:</strong> Built a silent local lexical matcher that auto-activates if API limits or keys fail.<br/>
+                  <strong>Trade-off:</strong> Ensures bulletproof operational resiliency and offline preview capabilities, sacrificing semantic context depth during failover modes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
