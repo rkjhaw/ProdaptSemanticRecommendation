@@ -17,7 +17,7 @@ export interface RecommendationResponse {
   explanation: string;
 }
 
-export type ActiveTab = "demo" | "architect" | "sandbox" | "repo";
+export type ActiveTab = "demo" | "architect" | "sandbox" | "repo" | "assignment";
 
 export interface ArchitectDoc {
   executive_summary: {

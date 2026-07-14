@@ -4,7 +4,8 @@ import DiscoveryDemo from "./components/DiscoveryDemo.tsx";
 import ArchitectHub from "./components/ArchitectHub.tsx";
 import ApiSandbox from "./components/ApiSandbox.tsx";
 import RepoViewer from "./components/RepoViewer.tsx";
-import { Sparkles, Cpu, Layers, GitCommit, HardDrive, Shield, AlertTriangle, CheckCircle, RefreshCw, Download, HelpCircle } from "lucide-react";
+import AssignmentAsk from "./components/AssignmentAsk.tsx";
+import { Sparkles, Cpu, Layers, GitCommit, HardDrive, Shield, AlertTriangle, CheckCircle, RefreshCw, Download, HelpCircle, Briefcase } from "lucide-react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>("demo");
@@ -96,6 +97,17 @@ export default function App() {
             >
               <HardDrive className="w-3.5 h-3.5" />
               Repo Files
+            </button>
+            <button
+              onClick={() => setActiveTab("assignment")}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
+                activeTab === "assignment"
+                  ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+              }`}
+            >
+              <Briefcase className="w-3.5 h-3.5" />
+              Assignment Ask
             </button>
           </nav>
 
@@ -189,6 +201,7 @@ export default function App() {
           {activeTab === "architect" && <ArchitectHub />}
           {activeTab === "sandbox" && <ApiSandbox />}
           {activeTab === "repo" && <RepoViewer />}
+          {activeTab === "assignment" && <AssignmentAsk />}
         </div>
 
       </main>
