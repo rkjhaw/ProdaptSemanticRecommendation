@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  semantic-recommendation-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: semantic_fashion_platform
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    restart: always

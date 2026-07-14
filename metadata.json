@@ -1,0 +1,8 @@
+{
+  "name": "Prodapt & Rakesh | Semantic Fashion Engine",
+  "description": "Enterprise-grade AI-powered semantic fashion discovery and personalized recommendation microservice using Google Gemini API.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
