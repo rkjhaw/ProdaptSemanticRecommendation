@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import { products, Product } from "./src/data/products.ts";
@@ -390,19 +391,23 @@ app.get("/api/reviews/:parent_asin", (req, res) => {
 // ---------------------------------------------------------
 
 async function startServer() {
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
+  const distPath = path.join(process.cwd(), "dist");
+  const hasBuild = fs.existsSync(path.join(distPath, "index.html"));
+
+  // Serve static production build if it exists and NODE_ENV is production
+  if (process.env.NODE_ENV === "production" && hasBuild) {
+    console.log("Serving static production build from dist/");
+    app.use(express.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  } else {
+    console.log("Starting Vite development middleware (NODE_ENV=" + (process.env.NODE_ENV || "development") + ", hasBuild=" + hasBuild + ")...");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
