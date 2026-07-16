@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FileText, HelpCircle, Briefcase, ListChecks, Database, ArrowRight, ExternalLink, ShieldCheck, Cpu, Terminal, Layers, Check, Copy, Code, PlayCircle, Key, FileJson } from "lucide-react";
+import { FileText, HelpCircle, Briefcase, ListChecks, Database, ArrowRight, ExternalLink, ShieldCheck, Cpu, Terminal, Layers, Check, Copy, Code, PlayCircle, Key, FileJson, BookOpen, Server } from "lucide-react";
 import DocumentationGuide from "./DocumentationGuide.tsx";
 
 // Import diagrams so Vite resolves and bundles them correctly
@@ -7,6 +7,7 @@ import architectureDiagramUrl from "../assets/images/system_architecture_1784018
 import sequenceDiagramUrl from "../assets/images/sequence_lifecycle_diagram_1784056719722.jpg";
 
 export default function AssignmentAsk() {
+  const [activeSubSection, setActiveSubSection] = useState<"brief" | "codebase" | "architecture" | "guide" | "api_docs">("brief");
   const [activePythonTab, setActivePythonTab] = useState<"main" | "recommend" | "schemas" | "quickstart">("main");
   const [copiedPython, setCopiedPython] = useState(false);
   const [activeHfTab, setActiveHfTab] = useState<"main" | "loader" | "quickstart">("main");
@@ -1373,7 +1374,68 @@ uvicorn main:app --port 8000 --reload
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Sub-Navigation Bar within Assignment Ask */}
+      <div className="flex items-center gap-1 overflow-x-auto bg-slate-100/80 dark:bg-slate-950 p-1.5 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 scrollbar-none sticky top-16 z-40 backdrop-blur-md">
+        <button
+          onClick={() => setActiveSubSection("brief")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+            activeSubSection === "brief"
+              ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/20"
+              : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <FileText className="w-3.5 h-3.5" />
+          Requirements & Schema
+        </button>
+        <button
+          onClick={() => setActiveSubSection("architecture")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+            activeSubSection === "architecture"
+              ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/20"
+              : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <Layers className="w-3.5 h-3.5" />
+          Technical Architecture Flows
+        </button>
+        <button
+          onClick={() => setActiveSubSection("codebase")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+            activeSubSection === "codebase"
+              ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/20"
+              : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <Code className="w-3.5 h-3.5" />
+          FastAPI Microservice Code
+        </button>
+        <button
+          onClick={() => setActiveSubSection("guide")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+            activeSubSection === "guide"
+              ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/20"
+              : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <BookOpen className="w-3.5 h-3.5" />
+          Take-Home Submission Hub
+        </button>
+        <button
+          onClick={() => setActiveSubSection("api_docs")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 ${
+            activeSubSection === "api_docs"
+              ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/20"
+              : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+          }`}
+        >
+          <Terminal className="w-3.5 h-3.5 text-indigo-500" />
+          API Documentation
+        </button>
+      </div>
+
+      {activeSubSection === "brief" && (
+        <>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Left column (2 cols wide): Main prompt and requirements */}
         <div className="lg:col-span-2 space-y-8">
@@ -1572,11 +1634,15 @@ uvicorn main:app --port 8000 --reload
         </div>
       </div>
 
-      {/* NEW SECTION: Programmatic Documentation Guide */}
-      <DocumentationGuide />
+        </>
+      )}
 
-      {/* NEW SECTION: Technical Architecture Diagrams */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
+      {activeSubSection === "guide" && (
+        <DocumentationGuide />
+      )}
+
+      {activeSubSection === "architecture" && (
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg text-indigo-600 dark:text-indigo-400">
             <Layers className="w-4 h-4" />
@@ -1817,9 +1883,12 @@ uvicorn main:app --port 8000 --reload
           </div>
         </div>
       </div>
+      )}
 
-      {/* ENTERPRISE PYTHON (FASTAPI) MICROSERVICE SECTION */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
+      {activeSubSection === "codebase" && (
+        <>
+          {/* ENTERPRISE PYTHON (FASTAPI) MICROSERVICE SECTION */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
           <div className="flex items-center gap-2">
             <div className="p-1.5 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg text-indigo-600 dark:text-indigo-400">
@@ -2425,6 +2494,261 @@ uvicorn main:app --port 8000 --reload
           </div>
         </div>
       </div>
+        </>
+      )}
+
+      {activeSubSection === "api_docs" && (
+        <div className="space-y-8 animate-fadeIn">
+          {/* API Header banner */}
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/60 dark:border-slate-800/60 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-2xl -mr-12 -mt-12"></div>
+            <div className="relative flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold tracking-wider uppercase border border-emerald-100 dark:border-indigo-900/30">
+                  <Terminal className="w-3.5 h-3.5 animate-pulse" />
+                  REST API Technical Reference & Specification
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                  Developer Interface & API Documentation
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-2xl">
+                  Comprehensive contract guide detailing HTTP request schemas, diagnostic health metrics, and curl-testing utilities to run or scale the microservice.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Left column: Endpoints list */}
+            <div className="lg:col-span-8 space-y-6">
+              
+              {/* Endpoint 1: Health Diagnostics */}
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 p-6 space-y-4 shadow-sm">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-[10px] font-black font-mono tracking-wider">
+                      GET
+                    </span>
+                    <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide font-mono">
+                      /api/health
+                    </h4>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-mono">Status: Public</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Diagnostic endpoint. Evaluates system readiness, verify process constraints, checks Google Gemini API credential presence, and reports cached vector index densities.
+                </p>
+
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Response Payload (200 OK)</span>
+                  <pre className="p-3 bg-slate-950 text-emerald-400 rounded-xl text-[10px] font-mono overflow-x-auto border border-slate-800 leading-normal">
+{`{
+  "status": "healthy",
+  "timestamp": "2026-07-16T13:35:10.125Z",
+  "ai_status": {
+    "has_gemini_api_key": true,
+    "vector_index_initialized": true,
+    "embedding_error": null,
+    "vector_index_size": 100
+  },
+  "environment": {
+    "port": 3000,
+    "node_env": "development"
+  }
+}`}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Endpoint 2: Get Products */}
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 p-6 space-y-4 shadow-sm">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-[10px] font-black font-mono tracking-wider">
+                      GET
+                    </span>
+                    <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide font-mono">
+                      /api/products
+                    </h4>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-mono">Status: Public</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Fetches the complete formatted product catalog cache stream retrieved during the bootstrapping flow.
+                </p>
+
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Response Payload (200 OK)</span>
+                  <pre className="p-3 bg-slate-950 text-slate-300 rounded-xl text-[10px] font-mono overflow-x-auto border border-slate-800 leading-normal">
+{`{
+  "total": 1,
+  "products": [
+    {
+      "parent_asin": "B01F3D556A",
+      "title": "Aurelio Breathable Swimwear Canvas Shorts",
+      "price": 34.99,
+      "features": ["Lightweight fabric", "Quick dry mesh lining"],
+      "description": ["Designed for style & flexibility"],
+      "store": "Aurelio Beachwear",
+      "categories": ["Men's", "Swimwear"],
+      "details": { "Material": "Polyester", "Size": "M" },
+      "average_rating": 4.6,
+      "rating_number": 84
+    }
+  ]
+}`}
+                  </pre>
+                </div>
+              </div>
+
+              {/* Endpoint 3: Semantic Recommendations */}
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 p-6 space-y-4 shadow-sm">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2.5 py-1 rounded bg-indigo-600 text-white text-[10px] font-black font-mono tracking-wider">
+                      POST
+                    </span>
+                    <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-wide font-mono">
+                      /api/recommend
+                    </h4>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-mono">Status: Secure Route</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Core recommendation endpoint. Converts user query string into high-dimensional embedding vector, computes similarity scores locally, and executes LLM-driven style narratives.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Request Body Params</span>
+                    <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-[11px] space-y-2">
+                      <div>
+                        <code className="text-indigo-500 font-bold font-mono">query</code> <span className="text-slate-400 font-mono">(string, Required)</span>
+                        <p className="text-slate-500 mt-0.5">Free-form stylistic goal (e.g. "I want a casual summer wedding guest suit")</p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-200/30 dark:border-slate-800/60">
+                        <code className="text-indigo-500 font-bold font-mono">budget</code> <span className="text-slate-400 font-mono">(number, Optional)</span>
+                        <p className="text-slate-500 mt-0.5">Maximum product pricing limit in USD (e.g. 50)</p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-200/30 dark:border-slate-800/60">
+                        <code className="text-indigo-500 font-bold font-mono">main_category</code> <span className="text-slate-400 font-mono">(string, Optional)</span>
+                        <p className="text-slate-500 mt-0.5">Scope results within a primary database category</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Sample Request Payload</span>
+                    <pre className="p-4 bg-slate-950 text-indigo-300 rounded-xl text-[10px] font-mono border border-slate-800 leading-relaxed">
+{`{
+  "query": "comfy beach shorts and sneakers",
+  "budget": 60,
+  "main_category": "All Beauty"
+}`}
+                    </pre>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Sample Response Payload (200 OK)</span>
+                  <pre className="p-3 bg-slate-950 text-slate-300 rounded-xl text-[10px] font-mono overflow-x-auto border border-slate-800 leading-normal">
+{`{
+  "success": true,
+  "execution_mode": "vector",
+  "query": "comfy beach shorts and sneakers",
+  "results": [
+    {
+      "parent_asin": "B01F3D556A",
+      "title": "Aurelio Breathable Swimwear Canvas Shorts",
+      "price": 34.99,
+      "score": 0.892,
+      "features": ["Lightweight fabric", "Quick dry mesh lining"]
+    }
+  ],
+  "stylist_narrative": "I've matched these breathable canvas beach shorts with matching light canvas sneakers. This ensemble delivers premium ventilation and active utility for any warm seaside stroll."
+}`}
+                  </pre>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right column: Host spec & cURL test box */}
+            <div className="lg:col-span-4 space-y-6">
+              
+              {/* Host and Configuration specs */}
+              <div className="bg-slate-900 text-white rounded-2xl p-5 space-y-4 shadow-md relative overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:16px_16px]"></div>
+                <div className="relative space-y-3">
+                  <div className="flex items-center gap-2 text-indigo-300">
+                    <Server className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider font-mono">Service Environment Context</span>
+                  </div>
+                  <div className="space-y-1">
+                    <h5 className="font-extrabold text-xs">Standard Production Bindings</h5>
+                    <p className="text-[11px] text-slate-300 leading-relaxed">
+                      All container proxies route via port 3000 to bind securely to external clients.
+                    </p>
+                  </div>
+                  <div className="space-y-2 pt-2 text-[10px] font-mono text-slate-400 border-t border-white/10">
+                    <div className="flex justify-between">
+                      <span>HTTP HOST BIND:</span>
+                      <span className="text-white font-semibold">0.0.0.0</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>HTTP PORT BIND:</span>
+                      <span className="text-white font-semibold">3000</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>SLA FAILOVER INITIATION:</span>
+                      <span className="text-emerald-400 font-semibold">Automatic resilients</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Interactive curl test box */}
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/50 dark:border-slate-800/60 p-5 space-y-4 shadow-sm">
+                <div className="flex items-center gap-2 border-b border-slate-50 dark:border-slate-800 pb-3">
+                  <Terminal className="w-4 h-4 text-indigo-500" />
+                  <span className="text-xs font-bold text-slate-800 dark:text-white uppercase tracking-wider font-mono">Terminal Testing</span>
+                </div>
+                
+                <div className="space-y-3">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block pt-2">cURL Test - Semantic Pipeline</span>
+                  <p className="text-[11px] text-slate-500 leading-normal">
+                    Issue a direct post command in your command-line terminal to evaluate the microservice:
+                  </p>
+                  
+                  <div className="relative bg-slate-950 p-3 rounded-lg border border-slate-850">
+                    <pre className="text-[10px] font-mono text-indigo-300 overflow-x-auto whitespace-pre-wrap select-all">
+{`curl -X POST http://localhost:3000/api/recommend \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "query": "I need some comfortable beach shorts and sandals",
+    "limit": 3
+  }'`}
+                    </pre>
+                  </div>
+                  
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block pt-2">PowerShell Test Equivalent</span>
+                  <div className="relative bg-slate-950 p-3 rounded-lg border border-slate-850">
+                    <pre className="text-[10px] font-mono text-indigo-300 overflow-x-auto whitespace-pre-wrap select-all">
+{`$body = @{
+  query = "comfortable beach shorts and sandals"
+  limit = 3
+} | ConvertTo-Json
+Invoke-RestMethod -Uri "http://localhost:3000/api/recommend" -Method Post -Body $body -ContentType "application/json"`}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
