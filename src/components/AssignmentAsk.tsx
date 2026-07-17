@@ -2175,7 +2175,7 @@ uvicorn main:app --port 8000 --reload
               <p className="text-[11px] text-slate-400">Verifies system status, database connection, and API key presence.</p>
               <div className="relative group">
                 <pre className="p-3 bg-slate-950 text-slate-200 rounded-xl font-mono text-[9.5px] border border-slate-800 whitespace-pre-wrap leading-normal">
-                  curl -X GET "https://ais-pre-bxniascpmdk3fr4izlm6da-500262105013.asia-southeast1.run.app/api/health"
+                  curl -X GET http://localhost:8000/api/health"
                 </pre>
               </div>
             </div>
@@ -2189,7 +2189,7 @@ uvicorn main:app --port 8000 --reload
               <p className="text-[11px] text-slate-400">Fetches and prints the complete set of preloaded fashion catalogs.</p>
               <div className="relative group">
                 <pre className="p-3 bg-slate-950 text-slate-200 rounded-xl font-mono text-[9.5px] border border-slate-800 whitespace-pre-wrap leading-normal">
-                  curl -X GET "https://ais-pre-bxniascpmdk3fr4izlm6da-500262105013.asia-southeast1.run.app/api/products"
+                  curl -X GET "http://localhost:8000/api/products"
                 </pre>
               </div>
             </div>
@@ -2203,7 +2203,7 @@ uvicorn main:app --port 8000 --reload
               <p className="text-[11px] text-slate-400">Scores products against high-dimensional similarity vectors.</p>
               <div className="relative group">
                 <pre className="p-3 bg-slate-950 text-slate-200 rounded-xl font-mono text-[9.5px] border border-slate-800 whitespace-pre-wrap leading-normal">
-                  {`curl -X POST "https://ais-pre-bxniascpmdk3fr4izlm6da-500262105013.asia-southeast1.run.app/api/recommend" \\
+                  {`curl -X POST "http://localhost:8000/api/recommend" \\
   -H "Content-Type: application/json" \\
   -d '{
     "query": "comfortable beach shorts",
