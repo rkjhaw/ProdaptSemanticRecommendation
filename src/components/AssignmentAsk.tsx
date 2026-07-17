@@ -2117,7 +2117,7 @@ uvicorn main:app --port 8000 --reload
               <div className="space-y-1">
                 <span className="text-[9px] font-bold text-indigo-500 uppercase block">Live Cloud Server URL</span>
                 <code className="text-[10px] break-all block text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 px-1.5 py-1 rounded border border-slate-200/50 dark:border-slate-850">
-                  https://ais-pre-bxniascpmdk3fr4izlm6da-500262105013.asia-southeast1.run.app
+                  https://prodaptsemanticrecommendation.onrender.com/
                 </code>
               </div>
               <div className="space-y-1">
