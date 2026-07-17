@@ -12,7 +12,7 @@
 
 ---
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live_Preview-brightgreen)](https://prodaptsemanticrecommendation.onrender.com/)
+[![Live Demo](https://img.shields.io/badge/Demo-Live_Preview-brightgreen)](https://ais-pre-bxniascpmdk3fr4izlm6da-500262105013.asia-southeast1.run.app)
 [![API Swagger Docs](https://img.shields.io/badge/API-Endpoints-blue)](#api-documentation)
 [![Docker](https://img.shields.io/badge/Docker-Supported-cyan)](#running-with-docker)
 [![Architecture](https://img.shields.io/badge/Architecture-Enterprise_Ready-orange)](#system-architecture)
